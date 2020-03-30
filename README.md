@@ -4,8 +4,8 @@ Rack::ES::Logger is a middleware gem to save logs using Elastic Search.
 
 ## Goals
 
-- # [checkbox:unchecked] Log request asyncronous.
-- # [checkbox:unchecked] Filter path by regular expression, Example: 'api/*', 'api/v1'. ...
+- [ ] Log request asyncronous.
+- [ ] Filter path by regular expression, Example: 'api/*', 'api/v1'.
 
 ## Installation
 
