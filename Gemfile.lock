@@ -2,11 +2,13 @@ PATH
   remote: .
   specs:
     rack_es_logger (0.1.0)
+      rack (>= 1.5.3)
 
 GEM
   remote: https://rubygems.org/
   specs:
     diff-lcs (1.3)
+    rack (2.2.2)
     rake (12.3.3)
     rspec (3.8.0)
       rspec-core (~> 3.8.0)
