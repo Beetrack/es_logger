@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     rack_es_logger (0.1.0)
-      rack (>= 1.5.3)
+      rack
 
 GEM
   remote: https://rubygems.org/
