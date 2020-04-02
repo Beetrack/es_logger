@@ -27,6 +27,18 @@ Or install it yourself as:
 
 ## Usage
 
+Generate initialize configuration:
+
+```ruby
+rails generate rack_es_logger:initialize
+creating initializer...
+      create  config/initializers/rack_es_logger.rb
+```
+
+Include middleware in `config/application.rb` or `config/environments/<environment>rb`:
+
+`config.middleware.use RackEsLogger`
+
 TODO: Write usage instructions here
 
 ## Development
