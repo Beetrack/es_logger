@@ -4,7 +4,8 @@ Rack::Es::Logger is a middleware gem to save logs using Elastic Search.
 
 ## Goals
 
-- [ ] Intercept requests to generate response attributes.
+- [x] Intercept requests to generate response attributes.
+- [x] Support generate configuration in Rails initializer.
 - [ ] Save response attributes in Elasticsearch.
 - [ ] Support process asyncronous.
 - [ ] Filter path by regular expression, Example: 'api/*', 'api/v1'.
@@ -37,7 +38,7 @@ creating initializer...
 
 Include middleware in `config/application.rb` or `config/environments/<environment>rb`:
 
-`config.middleware.use RackEsLogger`
+`config.middleware.use RackEsLogger::Application`
 
 TODO: Write usage instructions here
 
