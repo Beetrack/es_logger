@@ -23,8 +23,9 @@ Gem::Specification.new do |spec|
   end
   spec.require_paths = ['lib']
 
-  spec.add_runtime_dependency 'rack'
-  spec.add_runtime_dependency 'sidekiq', '>= 2.4.0'
-  spec.add_development_dependency 'minitest'
-  spec.add_development_dependency 'rack-test'
+  spec.add_runtime_dependency 'rack', '~> 1.5'
+  spec.add_runtime_dependency 'sidekiq', '~> 2.4', '>= 2.4.0'
+  spec.add_development_dependency 'minitest', '~> 5.0'
+  spec.add_development_dependency 'pry', '~> 0.12.2'
+  spec.add_development_dependency 'rack-test', '~> 0.6.3'
 end
