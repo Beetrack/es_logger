@@ -1,4 +1,4 @@
-module RackESLogger
+module RackEsLogger
   class Response
     def initialize(env)
       @env = env

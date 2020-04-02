@@ -1,7 +1,7 @@
 require 'rack_es_logger/version'
 require 'rack_es_logger/response'
 
-module RackESLogger
+module RackEsLogger
   class Application
     attr_reader :payload
 
@@ -10,7 +10,7 @@ module RackESLogger
     end
 
     def call(env)
-      response = RackESLogger::Response.new(env)
+      response = RackEsLogger::Response.new(env)
       @payload = response.call
       @app.call(env)
     end

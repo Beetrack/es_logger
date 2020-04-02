@@ -1,11 +1,11 @@
 require_relative 'test_helper'
 
-class RackESLoggerAppTest < Minitest::Test
+class RackEsLoggerAppTest < Minitest::Test
   include Rack::Test::Methods
 
   def app
     app = ->(_env) { [200, { 'Content-Type' => 'text/html' }, ['ok']] }
-    @rack_app = RackESLogger::Application.new(app)
+    @rack_app = RackEsLogger::Application.new(app)
   end
 
   def test_get_request
