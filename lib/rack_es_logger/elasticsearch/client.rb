@@ -12,7 +12,10 @@ module RackEsLogger
         puts '::Registering Elasticsearch Client'
         credentials = RackEsLogger.configuration.elasticsearch
 
-        @client = ConnectionPool.new do
+        pool_size = RackEsLogger.configuration.elasticsearch_pool_size
+        timeout = RackEsLogger.configuration.elasticsearch_timeout
+
+        @client = ConnectionPool.new(size: pool_size, timeout: timeout) do
           Elasticsearch::Client.new(credentials.merge(log: true))
         end
       end
