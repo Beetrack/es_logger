@@ -10,13 +10,13 @@ RackEsLogger.configure do |config|
     user: ENV['ELASTICSEARCH_USER'],
     password: ENV['ELASTICSEARCH_PASSWORD'],
     host: ENV['ELASTICSEARCH_HOST'],
-    port: ENV['ELASTICSEARCH_PORT']
+    port: ENV['ELASTICSEARCH_PORT'],
+    log: true
   }
 
   config.elasticsearch_index_name = ENV['ELASTICSEARCH_INDEX_NAME']
-
   config.elasticsearch_pool_size = ENV['ELASTICSEARCH_POOL_SIZE'] || 10
   config.elasticsearch_timeout = ENV['ELASTICSEARCH_TIMEOUT'] || 5
 end
 
-RackEsLogger::Elasticsearch::Client.instance.register_credentials
+RackEsLogger::Elasticsearch::ClientConnectionPool.instance.register_credentials
