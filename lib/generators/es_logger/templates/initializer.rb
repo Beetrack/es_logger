@@ -1,4 +1,4 @@
-RackEsLogger.configure do |config|
+EsLogger.configure do |config|
   # config.enabled = true
   # Enable delayed process (using Sidekiq)
   # config.use_sidekiq
@@ -19,4 +19,4 @@ RackEsLogger.configure do |config|
   config.elasticsearch_timeout = ENV['ELASTICSEARCH_TIMEOUT'] || 5
 end
 
-RackEsLogger::Elasticsearch::ClientConnectionPool.instance.register_credentials
+EsLogger::Elasticsearch::ClientConnectionPool.instance.register_credentials

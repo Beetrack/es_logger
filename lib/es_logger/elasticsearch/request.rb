@@ -1,4 +1,4 @@
-module RackEsLogger
+module EsLogger
   module Elasticsearch
     class Request
       attr_reader :attributes

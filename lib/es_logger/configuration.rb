@@ -1,4 +1,4 @@
-module RackEsLogger
+module EsLogger
   class << self
     attr_accessor :configuration
   end

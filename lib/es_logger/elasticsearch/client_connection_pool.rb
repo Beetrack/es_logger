@@ -1,9 +1,9 @@
 require 'singleton'
 require 'connection_pool'
-require 'rack_es_logger/configuration'
+require 'es_logger/configuration'
 require 'elasticsearch'
 
-module RackEsLogger
+module EsLogger
   module Elasticsearch
     class ClientConnectionPool
       include Singleton
@@ -11,10 +11,10 @@ module RackEsLogger
 
       def register_credentials
         puts '::Registering Elasticsearch Client'
-        credentials = RackEsLogger.configuration.elasticsearch
+        credentials = EsLogger.configuration.elasticsearch
 
-        pool_size = RackEsLogger.configuration.elasticsearch_pool_size
-        timeout = RackEsLogger.configuration.elasticsearch_timeout
+        pool_size = EsLogger.configuration.elasticsearch_pool_size
+        timeout = EsLogger.configuration.elasticsearch_timeout
 
         @client = ConnectionPool.new(size: pool_size, timeout: timeout) do
           ::Elasticsearch::Client.new(credentials)

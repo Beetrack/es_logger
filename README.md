@@ -1,21 +1,21 @@
-# RackEsLogger
+# EsLogger
 
-Rack::Es::Logger is a middleware gem to save logs using Elastic Search.
+EsLogger is a gem to save custom PORO object in Elasticsarch.
 
 ## Goals
 
-- [x] Intercept requests to generate response attributes.
-- [x] Support generate configuration in Rails initializer.
-- [ ] Save response attributes in Elasticsearch.
-- [ ] Support process asyncronous.
+- [x] Middleware to intercept and save request in Elasticsearch.
+- [x] Generate initialize configuration.
+- [ ] Process asyncronous with Sidekiq.
 - [ ] Filter path by regular expression, Example: 'api/*', 'api/v1'.
+- [ ] Generate new configuration to save custom objects.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'rack_es_logger'
+gem 'es_logger'
 ```
 
 And then execute:
@@ -24,21 +24,20 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install rack_es_logger
+    $ gem install es_logger
 
 ## Usage
 
 Generate initialize configuration:
 
 ```ruby
-rails generate rack_es_logger:initialize
-creating initializer...
-      create  config/initializers/rack_es_logger.rb
+rails generate es_logger:initialize
+  create config/initializers/es_logger.rb
 ```
 
 Include middleware in `config/application.rb` or `config/environments/<environment>rb`:
 
-`config.middleware.use RackEsLogger::Application`
+`config.middleware.use EsLogger::Rack`
 
 TODO: Write usage instructions here
 
@@ -50,5 +49,5 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/Beetrack/rack_es_logger.
+Bug reports and pull requests are welcome on GitHub at https://github.com/Beetrack/es_logger.
 

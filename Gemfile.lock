@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rack_es_logger (0.1.0)
+    es_logger (0.1.0)
       elasticsearch (~> 7.5, >= 7.5.0)
       elasticsearch-persistence (~> 7.0.0, >= 7.0.0)
       rack (~> 1.5)
@@ -72,9 +72,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  es_logger!
   minitest (~> 5.0)
   rack-test (~> 0.6.3)
-  rack_es_logger!
   rake (~> 12.0)
 
 BUNDLED WITH

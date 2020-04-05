@@ -1,8 +1,8 @@
 require 'rails/generators'
 require 'rails/generators/named_base'
-require 'generators/rack_es_logger/initialize_generator'
+require 'generators/es_logger/initialize_generator'
 
-module RackEsLogger
+module EsLogger
   module Generators
     class InitializeGenerator < ::Rails::Generators::Base
 
@@ -11,7 +11,7 @@ module RackEsLogger
       def create_initializer
         say 'creating initializer...'
 
-        template 'initializer.rb', 'config/initializers/rack_es_logger.rb', :assigns => { :access_token => 'value' }
+        template 'initializer.rb', 'config/initializers/es_logger.rb', :assigns => { :access_token => 'value' }
       end
     end
   end
