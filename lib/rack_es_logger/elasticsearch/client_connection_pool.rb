@@ -1,6 +1,7 @@
 require 'singleton'
 require 'connection_pool'
 require 'rack_es_logger/configuration'
+require 'elasticsearch'
 
 module RackEsLogger
   module Elasticsearch
@@ -16,7 +17,7 @@ module RackEsLogger
         timeout = RackEsLogger.configuration.elasticsearch_timeout
 
         @client = ConnectionPool.new(size: pool_size, timeout: timeout) do
-          Elasticsearch::Client.new(credentials)
+          ::Elasticsearch::Client.new(credentials)
         end
       end
     end
