@@ -1,7 +1,7 @@
 require 'rack_es_logger/version'
 require 'rack_es_logger/response'
 require 'rack_es_logger/configuration'
-require 'rack_es_logger/elasticsearch/client'
+require 'rack_es_logger/elasticsearch/client_connection_pool'
 
 module RackEsLogger
   class Application
