@@ -10,7 +10,7 @@ module EsLogger
       attr_accessor :client
 
       def register_credentials
-        puts '::Registering Elasticsearch Client'
+        puts 'Registering Elasticsearch Client'
         credentials = EsLogger.configuration.elasticsearch
 
         pool_size = EsLogger.configuration.elasticsearch_pool_size

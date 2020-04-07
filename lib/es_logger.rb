@@ -4,7 +4,7 @@ require 'es_logger/configuration'
 require 'es_logger/elasticsearch/client_connection_pool'
 
 module EsLogger
-  class Application
+  class Rack
     attr_reader :payload
 
     def initialize(app)
@@ -12,9 +12,16 @@ module EsLogger
     end
 
     def call(env)
-      response = EsLogger::Response.new(env)
-      @payload = response.call
+      response = EsLogger::Response.new(env).call
+      response[:timestamp] = Time.now.utc
+
+      client.index index: EsLogger.configuration.elasticsearch_index_name, body: response
+
       @app.call(env)
+    end
+
+    def client
+      ::EsLogger::Elasticsearch::ClientConnectionPool.instance.client.with { |client| client }
     end
   end
 end
