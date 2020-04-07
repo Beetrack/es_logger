@@ -13,10 +13,9 @@ module EsLogger
         puts 'Registering Elasticsearch Client'
         credentials = EsLogger.configuration.elasticsearch
 
-        pool_size = EsLogger.configuration.elasticsearch_pool_size
-        timeout = EsLogger.configuration.elasticsearch_timeout
+        pool_connection = EsLogger.configuration.elasticsearch_pool_connection
 
-        @client = ConnectionPool.new(size: pool_size, timeout: timeout) do
+        @client = ConnectionPool.new(pool_connection) do
           ::Elasticsearch::Client.new(credentials)
         end
       end

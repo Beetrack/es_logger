@@ -15,8 +15,10 @@ EsLogger.configure do |config|
   }
 
   config.elasticsearch_index_name = ENV['ELASTICSEARCH_INDEX_NAME']
-  config.elasticsearch_pool_size = ENV['ELASTICSEARCH_POOL_SIZE'] || 10
-  config.elasticsearch_timeout = ENV['ELASTICSEARCH_TIMEOUT'] || 5
+  config.elasticsearch_pool_connection = {
+    size: ENV['ELASTICSEARCH_POOL_SIZE'] || 10,
+    timeout: ENV['ELASTICSEARCH_TIMEOUT'] || 5
+  }
 end
 
 EsLogger::Elasticsearch::ClientConnectionPool.instance.register_credentials
