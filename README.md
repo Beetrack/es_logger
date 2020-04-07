@@ -1,6 +1,6 @@
 # EsLogger
 
-EsLogger is a gem to save custom PORO object in Elasticsarch.
+EsLogger is a gem to save custom PORO object in Elasticsearch.
 
 ## Goals
 
@@ -32,7 +32,8 @@ Generate initialize configuration:
 
 ```ruby
 rails generate es_logger:initialize
-  create config/initializers/es_logger.rb
+
+create config/initializers/es_logger.rb
 ```
 
 Include middleware in `config/application.rb` or `config/environments/<environment>rb`:
