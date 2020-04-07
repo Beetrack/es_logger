@@ -11,7 +11,7 @@ EsLogger.configure do |config|
     password: ENV['ELASTICSEARCH_PASSWORD'],
     host: ENV['ELASTICSEARCH_HOST'],
     port: ENV['ELASTICSEARCH_PORT'],
-    log: true
+    log: ENV['ELASTICSEARCH_LOG']
   }
 
   config.elasticsearch_index_name = ENV['ELASTICSEARCH_INDEX_NAME']

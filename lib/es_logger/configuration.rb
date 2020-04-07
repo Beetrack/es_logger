@@ -14,9 +14,9 @@ module EsLogger
     attr_accessor :elasticsearch_pool_connection
 
     def initialize
-      @elasticsearch = nil
-      @elasticsearch_index_name = nil
-      @elasticsearch_pool_connection = nil
+      @elasticsearch = { host: 'localhost', port: 9200, user: nil, password: nil, log: true }
+      @elasticsearch_index_name = 'request'
+      @elasticsearch_pool_connection = { size: 10, timeout: 5 }
     end
   end
 end
