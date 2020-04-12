@@ -5,6 +5,11 @@ EsLogger.configure do |config|
   # You can supply custom Sidekiq options:
   # config.use_sidekiq 'queue' => 'low'
   #
+  # Set the pattern to allows save in Elasticsearch
+  # Examples:
+  # ^api\/external\/\w+ -> api/external/<some word>
+  # config.include_pattern = [/^api\/external\/+w/, 'api/external/v1']
+
   # params configuration to connect with Elasticsearch
   config.elasticsearch = {
     user: ENV['ELASTICSEARCH_USER'],
