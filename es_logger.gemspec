@@ -25,5 +25,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'elasticsearch', '~> 7.4', '>= 7.4.0'
   spec.add_runtime_dependency 'elasticsearch-persistence', '~> 7.0.0', '>= 7.0.0'
   spec.add_runtime_dependency 'rack', '~> 2.0'
+  spec.add_development_dependency 'elasticsearch-extensions'
   spec.add_development_dependency 'rspec', '~> 3.8', '<= 3.8'
+  spec.add_development_dependency 'rubocop', '~>0.75.0'
 end
