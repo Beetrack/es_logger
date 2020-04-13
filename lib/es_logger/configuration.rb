@@ -9,11 +9,13 @@ module EsLogger
   end
 
   class Configuration
+    attr_accessor :include_pattern
     attr_accessor :elasticsearch
     attr_accessor :elasticsearch_index_name
     attr_accessor :elasticsearch_pool_connection
 
     def initialize
+      @include_pattern = nil
       @elasticsearch = { host: 'localhost', port: 9200, user: nil, password: nil, log: true }
       @elasticsearch_index_name = 'request'
       @elasticsearch_pool_connection = { size: 10, timeout: 5 }
