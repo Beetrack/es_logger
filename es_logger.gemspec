@@ -22,6 +22,7 @@ Gem::Specification.new do |spec|
   end
   spec.require_paths = ['lib']
 
+  spec.add_runtime_dependency 'connection_pool', '~> 2.2.2'
   spec.add_runtime_dependency 'elasticsearch', '~> 7.4', '>= 7.4.0'
   spec.add_runtime_dependency 'elasticsearch-persistence', '~> 7.0.0', '>= 7.0.0'
   spec.add_runtime_dependency 'rack', '~> 2.0'
