@@ -5,12 +5,14 @@ require 'elasticsearch/extensions/test/cluster/tasks'
 require_relative 'support/mock_rack_app'
 
 RSpec.configure do |config|
-  config.before :all, elasticsearch: true do
-    Elasticsearch::Extensions::Test::Cluster.start(port: 9250, timeout: 120) unless Elasticsearch::Extensions::Test::Cluster.running?(on: 9250)
-  end
+  if ENV['GITHUB_ACTION'].nil?
+    config.before :all, elasticsearch: true do
+      Elasticsearch::Extensions::Test::Cluster.start(port: 9250, timeout: 120) unless Elasticsearch::Extensions::Test::Cluster.running?(on: 9250)
+    end
 
-  config.after :suite do
-    Elasticsearch::Extensions::Test::Cluster.stop(port: 9250) if Elasticsearch::Extensions::Test::Cluster.running?(on: 9250)
+    config.after :suite do
+      Elasticsearch::Extensions::Test::Cluster.stop(port: 9250) if Elasticsearch::Extensions::Test::Cluster.running?(on: 9250)
+    end
   end
 
   config.expect_with :rspec do |expectations|
