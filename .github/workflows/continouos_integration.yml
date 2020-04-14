@@ -45,10 +45,11 @@ jobs:
 
       - run: bundle install --jobs 4 --retry 4
 
-      - run: bundle exec rspec --profile 10 --format progress
+      - name: Run Rspec test
+        run: bundle exec rspec --profile 10 --format progress
         env:
           TEST_ELASTICSEARCH_PORT: 9200
 
       - name: Publish code coverage
-      run: |
-        ./cc-test-reporter after-build -r ${{secrets.CODECOV_TOKEN}}
+        run: |
+          ./cc-test-reporter after-build -r ${{secrets.CODECOV_TOKEN}}
