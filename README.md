@@ -1,6 +1,6 @@
 # EsLogger
 
-![](https://github.com/Beetrack/es-logger/workflows/.github/workflows/continouos_integration.yml/badge.svg?branch=master)
+![](https://github.com/Beetrack/es-logger/workflows/Github%20Actions/badge.svg?branch=master)
 EsLogger is a gem to save custom PORO object in Elasticsearch.
 
 ## Goals
