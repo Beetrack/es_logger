@@ -1,7 +1,7 @@
 require 'es_logger/version'
 require 'es_logger/response'
 require 'es_logger/configuration'
-require 'es_logger/elasticsearch/client_connection_pool'
+require 'es_logger/request'
 
 module EsLogger
   class Rack
@@ -13,29 +13,19 @@ module EsLogger
     end
 
     def call(env)
-      @response = EsLogger::Response.new(env).call
+      @response = EsLogger::Response.call(env)
 
-      send_request
+      if !(worker = EsLogger.configuration.async_handler).nil?
+        worker.call(@response)
+      else
+        EsLogger::Request.call(@response)
+      end
 
       @app.call(env)
     end
 
-    def send_request
-      return if EsLogger.configuration.include_pattern.find { |route| @response[:path].match?(route) }.nil?
-
-      return if @response[:path] == '/cable'
-
-      @response[:timestamp] = Time.now.utc
-
-      client.index index: EsLogger.configuration.elasticsearch_index_name, body: @response
-    rescue ::Elasticsearch::Transport::Transport::Errors::ServiceUnavailable
-      puts 'Cannot connect with Elastisearch service'
-    end
-
-    private
-
-    def client
-      ::EsLogger::Elasticsearch::ClientConnectionPool.instance.client.with { |client| client }
+    def valid_path?
+      @response[:path] != '/cable' || !EsLogger.configuration.include_pattern.find { |route| @response[:path].match?(route) }.nil?
     end
   end
 end
