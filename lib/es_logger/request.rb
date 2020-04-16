@@ -3,7 +3,7 @@ require 'es_logger/elasticsearch/client_connection_pool'
 
 module EsLogger
   class Request
-    def call(response)
+    def self.call(response)
       response['timestamp'] = Time.now.utc
 
       client.index index: EsLogger.configuration.elasticsearch_index_name, body: response
