@@ -1,6 +1,8 @@
 # EsLogger
 
-EsLogger is a gem intercept and save request in Elasticsearch. It has support to:
+![](https://github.com/Beetrack/es-logger/workflows/Github%20Actions/badge.svg?branch=master) [![Maintainability](https://api.codeclimate.com/v1/badges/3b62609b734fa5cb76b2/maintainability)](https://codeclimate.com/github/Beetrack/es-logger/maintainability)
+
+EsLogger is a gem to intercept and save request in Elasticsearch. It has support to:
 
 - [x] Middleware to intercept and save request in Elasticsearch.
 - [x] Generate initialize configuration.
