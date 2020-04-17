@@ -1,6 +1,6 @@
 # EsLogger
 
-![](https://github.com/Beetrack/es-logger/workflows/Github%20Actions/badge.svg?branch=master) [![Maintainability](https://api.codeclimate.com/v1/badges/3b62609b734fa5cb76b2/maintainability)](https://codeclimate.com/github/Beetrack/es-logger/maintainability)
+![](https://github.com/Beetrack/es-logger/workflows/Github%20Actions/badge.svg?branch=master) [![Maintainability](https://api.codeclimate.com/v1/badges/3b62609b734fa5cb76b2/maintainability)](https://codeclimate.com/github/Beetrack/es-logger/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/3b62609b734fa5cb76b2/test_coverage)](https://codeclimate.com/github/Beetrack/es-logger/test_coverage)
 
 EsLogger is a gem to intercept and save request in Elasticsearch. It has support to:
 
