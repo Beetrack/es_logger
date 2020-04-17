@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['andres.colonia@beetrack.com']
   spec.summary       = 'es_logger is a gem to save logs in Elasticsearh'
 
-  spec.required_ruby_version = Gem::Requirement.new('>= 2.5.3')
+  spec.required_ruby_version = Gem::Requirement.new('>= 2.4.4')
   if spec.respond_to?(:metadata)
     spec.metadata['allowed_push_host'] = 'https://rubygems.pkg.github.com/Beetrack'
   else
@@ -28,7 +28,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'elasticsearch', '~> 7.4'
   spec.add_runtime_dependency 'elasticsearch-persistence', '~> 7.0.0', '>= 7.0.0'
   spec.add_runtime_dependency 'rack', '~> 2.0'
-  spec.add_runtime_dependency 'sidekiq', '~> 5.1.3', '>= 5.1.3'
+  spec.add_runtime_dependency 'sidekiq', '>= 5.1.3', '<= 5.3.0'
   spec.add_development_dependency 'elasticsearch-extensions', '~> 0.0.31'
   spec.add_development_dependency 'pry', '~> 0.12.2'
   spec.add_development_dependency 'rspec', '~> 3.8', '<= 3.8'
