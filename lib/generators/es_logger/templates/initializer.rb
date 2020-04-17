@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 EsLogger.configure do |config|
   # Enable delayed process (using Sidekiq)
   # config.use_sidekiq
