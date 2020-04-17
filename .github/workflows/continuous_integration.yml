@@ -1,0 +1,66 @@
+name: Github Actions
+
+on:
+  push:
+    branches:
+      - 'develop'
+      - 'master'
+      - 'feature/add-github-actions-workflow'
+
+  pull_request:
+    branches:
+      - 'develop'
+      - 'master'
+
+jobs:
+  install_dependencies_and_run_test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.5
+
+      - name: Configure sysctl limits
+        run: |
+          sudo swapoff -a
+          sudo sysctl -w vm.swappiness=1
+          sudo sysctl -w fs.file-max=262144
+          sudo sysctl -w vm.max_map_count=262144
+
+      - name: Runs Elasticsearch
+        uses: elastic/elastic-github-actions/elasticsearch@master
+        with:
+          stack-version: 7.6.0
+
+      - name: Setup Code Climate test-reporter
+        if: github.ref == 'refs/heads/master'
+        run: |
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+          chmod +x ./cc-test-reporter
+          ./cc-test-reporter before-build
+
+      - run: gem install bundler
+
+      - run: bundle install --jobs 4 --retry 4
+
+      - name: Run Rspec test
+        run: bundle exec rspec --profile 10 --format progress
+        env:
+          TEST_ELASTICSEARCH_PORT: 9200
+
+      - name: Publish code coverage
+        if: github.ref == 'refs/heads/master'
+        run: |
+          ./cc-test-reporter after-build -r ${{secrets.CODECLIMATE_TOKEN}}
+
+      - name: Publish Package only in master
+        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+        run: |
+          export VERSION=$(cat lib/es_logger/version.rb | grep 'VERSION =' | awk '{ gsub("\"",""); print $3 }')
+          echo ":github: Bearer ${{ secrets.GITHUB_TOKEN }}" >> ~/.gem/credentials
+          gem build es-logger.gemspec
+          gem push --key github --host https://rubygems.pkg.github.com/Beetrack es-logger-$VERSION.gem
+
