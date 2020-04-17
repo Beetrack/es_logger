@@ -36,6 +36,7 @@ jobs:
           stack-version: 7.6.0
 
       - name: Setup Code Climate test-reporter
+        if: github.ref == 'refs/heads/master'
         run: |
           curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
           chmod +x ./cc-test-reporter
@@ -51,6 +52,7 @@ jobs:
           TEST_ELASTICSEARCH_PORT: 9200
 
       - name: Publish code coverage
+        if: github.ref == 'refs/heads/master'
         run: |
           ./cc-test-reporter after-build -r ${{secrets.CODECLIMATE_TOKEN}}
 
