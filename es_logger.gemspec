@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = Gem::Requirement.new('>= 2.5.3')
   if spec.respond_to?(:metadata)
-    spec.metadata['allowed_push_host'] = 'http://beetrack_gemserver.com'
+    spec.metadata['allowed_push_host'] = 'https://rubygems.pkg.github.com/Beetrack'
   else
     raise 'RubyGems 2.0 or newer is required to protect against ' \
       'public gem pushes.'
