@@ -5,27 +5,31 @@ require 'es_logger/request'
 
 module EsLogger
   class Rack
-    attr_reader :response
+    attr_reader :response, :processed
 
     def initialize(app)
       @app = app
       @response = {}
+      @processed = false
     end
 
     def call(env)
       @response = EsLogger::Response.call(env)
 
-      if !(worker = EsLogger.configuration.async_handler).nil?
-        worker.call(@response)
+      worker = EsLogger.configuration.async_handler
+
+      if valid_path?
+        !worker.nil? ? worker.call(response) : EsLogger::Request.call(response)
+        @processed = true
       else
-        EsLogger::Request.call(@response)
+        @processed = false
       end
 
       @app.call(env)
     end
 
     def valid_path?
-      @response[:path] != '/cable' || !EsLogger.configuration.include_pattern.find { |route| @response[:path].match?(route) }.nil?
+      @response['path'] != '/cable' || !EsLogger.configuration.include_pattern.find { |route| @response['path'].match?(route) }.nil?
     end
   end
 end
