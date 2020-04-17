@@ -17,7 +17,7 @@ module EsLogger
       include ::Sidekiq::Worker
 
       def perform(args)
-        EsLogger::Request.new.call(args)
+        EsLogger::Request.call(args)
       end
     end
   end
