@@ -61,6 +61,7 @@ jobs:
         run: |
           export VERSION=$(cat lib/es_logger/version.rb | grep 'VERSION =' | awk '{ gsub("\"",""); print $3 }')
           echo ":github: Bearer ${{ secrets.GITHUB_TOKEN }}" >> ~/.gem/credentials
+          chmod 0600 /home/runner/.gem/credentials
           gem build es_logger.gemspec
           gem push --key github --host https://rubygems.pkg.github.com/Beetrack es-logger-$VERSION.gem
 
