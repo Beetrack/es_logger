@@ -1,14 +1,15 @@
 # EsLogger
 
-EsLogger is a gem to save custom PORO object in Elasticsearch.
-
-## Goals
+EsLogger is a gem intercept and save request in Elasticsearch. It has support to:
 
 - [x] Middleware to intercept and save request in Elasticsearch.
 - [x] Generate initialize configuration.
 - [x] Include pattern to accept the requests, Example: `^api\/external\/\w+` -> `api/external/<some word>`
 - [x] Process asyncronous with Sidekiq.
-- [ ] Generate new configuration to save custom objects.
+
+## Future
+
+- Generate new configuration to save custom objects.
 
 ## Installation
 
@@ -32,8 +33,6 @@ Generate initialize configuration:
 
 ```ruby
 rails generate es_logger:initialize
-
-create config/initializers/es_logger.rb
 ```
 
 Include middleware in `config/application.rb` or `config/environments/<environment>rb`:
