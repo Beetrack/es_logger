@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'lib/es_logger/version'
 
 Gem::Specification.new do |spec|
@@ -26,8 +28,8 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'elasticsearch', '~> 7.4'
   spec.add_runtime_dependency 'elasticsearch-persistence', '~> 7.0.0', '>= 7.0.0'
   spec.add_runtime_dependency 'rack', '~> 2.0'
-  spec.add_runtime_dependency 'sidekiq', '~> 5.1.3'
-  spec.add_development_dependency 'elasticsearch-extensions'
+  spec.add_runtime_dependency 'sidekiq', '~> 5.1.3', '>= 5.1.3'
+  spec.add_development_dependency 'elasticsearch-extensions', '~> 0.0.31'
   spec.add_development_dependency 'pry', '~> 0.12.2'
   spec.add_development_dependency 'rubocop', '~>0.75.0'
   spec.add_development_dependency 'rspec', '~> 3.8', '<= 3.8'
