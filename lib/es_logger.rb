@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'es_logger/version'
 require 'es_logger/response'
 require 'es_logger/configuration'

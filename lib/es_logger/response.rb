@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module EsLogger
   class Response
     def self.call(env)

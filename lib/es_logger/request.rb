@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'es_logger/configuration'
 require 'es_logger/elasticsearch/client_connection_pool'
 
