@@ -1,7 +1,14 @@
 require 'rack'
+require 'sidekiq'
 require 'rake'
+require 'pry'
 require 'es_logger'
+require 'es_logger/configuration'
+require 'es_logger/delay/sidekiq'
 require 'elasticsearch/extensions/test/cluster/tasks'
+require 'sidekiq/testing'
+Sidekiq::Testing.inline!
+
 require_relative 'support/mock_rack_app'
 
 RSpec.configure do |config|

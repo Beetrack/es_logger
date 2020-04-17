@@ -1,41 +1,37 @@
+# frozen_string_literal: true
+
 require 'es_logger/version'
 require 'es_logger/response'
 require 'es_logger/configuration'
-require 'es_logger/elasticsearch/client_connection_pool'
+require 'es_logger/request'
 
 module EsLogger
   class Rack
-    attr_reader :response
+    attr_reader :response, :processed
 
     def initialize(app)
       @app = app
       @response = {}
+      @processed = false
     end
 
     def call(env)
-      @response = EsLogger::Response.new(env).call
+      @response = EsLogger::Response.call(env)
 
-      send_request
+      worker = EsLogger.configuration.async_handler
+
+      if valid_path?
+        !worker.nil? ? worker.call(response) : EsLogger::Request.call(response)
+        @processed = true
+      else
+        @processed = false
+      end
 
       @app.call(env)
     end
 
-    def send_request
-      return if EsLogger.configuration.include_pattern.find { |route| @response[:path].match?(route) }.nil?
-
-      return if @response[:path] == '/cable'
-
-      @response[:timestamp] = Time.now.utc
-
-      client.index index: EsLogger.configuration.elasticsearch_index_name, body: @response
-    rescue ::Elasticsearch::Transport::Transport::Errors::ServiceUnavailable
-      puts 'Cannot connect with Elastisearch service'
-    end
-
-    private
-
-    def client
-      ::EsLogger::Elasticsearch::ClientConnectionPool.instance.client.with { |client| client }
+    def valid_path?
+      @response['path'] != '/cable' || !EsLogger.configuration.include_pattern.find { |route| @response['path'].match?(route) }.nil?
     end
   end
 end

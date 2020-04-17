@@ -26,35 +26,33 @@ RSpec.describe EsLogger::Rack, elasticsearch: true do
 
     it 'method GET' do
       request.get("/api/external/routes?name=#{@name}&identifier=#{@identifier}", 'content-type' => 'application/json')
-
-      expect(es_logger.response[:timestamp]).not_to be_nil
-      expect(es_logger.response[:request_method]).to eq('GET')
-      expect(es_logger.response[:query_string_params]['identifier']).to eq(@identifier)
-      expect(es_logger.response[:query_string_params]['name']).to eq(@name)
+      expect(es_logger.processed).to eq(true)
     end
 
     it 'method POST' do
       data = StringIO.new("identifier=#{@identifier}&name=#{@name}")
       request.post('/api/external/routes/create', input: data, 'content-type' => 'application/json')
-
-      expect(es_logger.response[:timestamp]).not_to be_nil
-      expect(es_logger.response[:request_method]).to eq('POST')
-      expect(es_logger.response[:params]['identifier']).to eq(@identifier)
-      expect(es_logger.response[:params]['name']).to eq(@name)
+      expect(es_logger.processed).to eq(true)
     end
   end
 
   context 'validate routes' do
     it 'include pattern' do
       request.get('/api/external')
-
-      expect(es_logger.response[:timestamp]).not_to be_nil
+      expect(es_logger.processed).to eq(true)
     end
 
     it 'exclude pattern' do
       request.get('/cable')
+      expect(es_logger.processed).to eq(false)
+    end
+  end
 
-      expect(es_logger.response[:timestamp]).to be_nil
+  context 'sidekiq support' do
+    it 'complete job' do
+      EsLogger.configure(&:use_sidekiq)
+      request.get('/api/external/async-task')
+      expect(es_logger.processed).to eq(true)
     end
   end
 end
