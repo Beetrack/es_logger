@@ -2,3 +2,4 @@
 *.swp
 .rspec
 spec/examples.txt
+coverage/*

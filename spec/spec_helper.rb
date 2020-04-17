@@ -7,9 +7,21 @@ require 'es_logger/configuration'
 require 'es_logger/delay/sidekiq'
 require 'elasticsearch/extensions/test/cluster/tasks'
 require 'sidekiq/testing'
+
 Sidekiq::Testing.inline!
 
 require_relative 'support/mock_rack_app'
+
+require 'simplecov'
+
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+  SimpleCov::Formatter::HTMLFormatter
+]
+
+SimpleCov.start do
+  add_filter '/spec/'
+  track_files 'lib/**/*.rb'
+end
 
 RSpec.configure do |config|
   if ENV['GITHUB_ACTION'].nil?
