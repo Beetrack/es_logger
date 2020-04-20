@@ -41,6 +41,10 @@ Include middleware in `config/application.rb` or `config/environments/<environme
 
 `config.middleware.use EsLogger::Rack`
 
+### Asyncronous Process
+
+if Sidekiq is enabled without queue, it will use `es_logger` queue, remember that this should be created in sidekiq configuration.
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
