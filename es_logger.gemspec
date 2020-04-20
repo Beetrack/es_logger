@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['andres.colonia@beetrack.com']
   spec.summary       = 'es_logger is a gem to save logs in Elasticsearh'
 
-  spec.required_ruby_version = Gem::Requirement.new('>= 2.4.4')
+  spec.required_ruby_version = Gem::Requirement.new('>= 2.4.1')
   if spec.respond_to?(:metadata)
     spec.metadata['allowed_push_host'] = 'https://rubygems.pkg.github.com/Beetrack'
   else
