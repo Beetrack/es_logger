@@ -12,7 +12,7 @@ module EsLogger
       client.index index: EsLogger.configuration.elasticsearch_index_name, body: response
 
       response
-    rescue ::Elasticsearch::Transport::Transport::Errors::ServiceUnavailable
+    rescue ::Elasticsearch::Transport::Transport::Errors::ServiceUnavailable, ::Faraday::ConnectionFailed
       puts 'Cannot connect with Elastisearch service'
     end
   end

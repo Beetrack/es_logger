@@ -31,7 +31,21 @@ module EsLogger
     end
 
     def valid_path?
-      @response['path'] != '/cable' || !EsLogger.configuration.include_pattern.find { |route| @response['path'].match?(route) }.nil?
+      excluded_path? || included_path?
+    end
+
+    private
+
+    def excluded_path?
+      @response['path'] != '/cable'
+    end
+
+    def included_path?
+      include_pattern = EsLogger.configuration.include_pattern
+
+      return true if include_pattern.nil?
+
+      !include_pattern.find { |route| @response['path'].match?(route) }.nil?
     end
   end
 end

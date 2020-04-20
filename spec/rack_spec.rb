@@ -6,7 +6,6 @@ RSpec.describe EsLogger::Rack, elasticsearch: true do
   let(:request) { Rack::MockRequest.new(es_logger) }
   let!(:configure) do
     EsLogger.configure do |c|
-      c.elasticsearch_index_name = 'test.request'
       c.include_pattern = [/^\/api\/external\/+w/, /^\/api\/external/]
       c.elasticsearch = {
         user: ENV['TEST_ELASTICSEARCH_USER'] || 'elastic',

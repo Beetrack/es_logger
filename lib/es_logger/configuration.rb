@@ -20,7 +20,7 @@ module EsLogger
     def initialize
       @async_handler = nil
       @include_pattern = nil
-      @elasticsearch = { host: 'localhost', port: 9200, user: 'elastic', password: nil, log: true }
+      @elasticsearch = {}
       @elasticsearch_index_name = 'request'
       @elasticsearch_pool_connection = { size: 10, timeout: 5 }
     end

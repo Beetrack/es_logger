@@ -13,11 +13,11 @@ EsLogger.configure do |config|
 
   # params configuration to connect with Elasticsearch
   config.elasticsearch = {
-    user: ENV['ELASTICSEARCH_USER'],
-    password: ENV['ELASTICSEARCH_PASSWORD'],
-    host: ENV['ELASTICSEARCH_HOST'],
-    port: ENV['ELASTICSEARCH_PORT'],
-    log: ENV['ELASTICSEARCH_LOG']
+    user: ENV['ELASTICSEARCH_USER'] || 'elastic',
+    password: ENV['ELASTICSEARCH_PASSWORD'] || '',
+    host: ENV['ELASTICSEARCH_HOST'] || 'localhost',
+    port: ENV['ELASTICSEARCH_PORT'] || 9200,
+    log: ENV['ELASTICSEARCH_LOG'] || true
   }
 
   config.elasticsearch_index_name = ENV['ELASTICSEARCH_INDEX_NAME']
