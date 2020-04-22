@@ -6,7 +6,7 @@ require 'es_logger/elasticsearch/client_connection_pool'
 module EsLogger
   class Request
     def self.call(response)
-      response['timestamp'] = Time.now.utc
+      response[:timestamp] = Time.now.iso8601
 
       client = ::EsLogger::Elasticsearch::ClientConnectionPool.instance.client.with { |c| c }
       client.index index: EsLogger.configuration.elasticsearch_index_name, body: response

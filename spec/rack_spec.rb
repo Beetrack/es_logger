@@ -8,10 +8,10 @@ RSpec.describe EsLogger::Rack, elasticsearch: true do
     EsLogger.configure do |c|
       c.include_pattern = [/^\/api\/external\/+w/, /^\/api\/external/]
       c.elasticsearch = {
-        user: ENV['TEST_ELASTICSEARCH_USER'] || 'elastic',
-        password: ENV['TEST_ELASTICSEARCH_PASSWORD'] || '',
-        host: ENV['TEST_ELASTICSEARCH_HOST'] || 'localhost',
-        port: ENV['TEST_ELASTICSEARCH_PORT'] || 9250
+        user: ENV['ELASTICSEARCH_USER'] || 'elastic',
+        password: ENV['ELASTICSEARCH_PASSWORD'] || '',
+        host: ENV['ELASTICSEARCH_HOST'] || 'localhost',
+        port: ENV['ELASTICSEARCH_PORT'] || 9250
       }
     end
   end
