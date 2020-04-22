@@ -4,11 +4,11 @@ module EsLogger
   class Response
     def self.call(env)
       payload = {
-        'remote_address' => env['REMOTE_ADDR'],
-        'request_method' => env['REQUEST_METHOD'],
-        'path' => env['PATH_INFO'],
-        'query_string_params' => ::Rack::Utils.parse_nested_query(env['QUERY_STRING']),
-        'params' => ::Rack::Utils.parse_query(env['rack.input'].read, '&')
+        remote_address: env['REMOTE_ADDR'],
+        request_method: env['REQUEST_METHOD'],
+        path: env['PATH_INFO'],
+        query_string_params: ::Rack::Utils.parse_nested_query(env['QUERY_STRING']),
+        params: ::Rack::Utils.parse_query(env['rack.input'].read, '&'),
       }
 
       controller = env['action_controller.instance']
