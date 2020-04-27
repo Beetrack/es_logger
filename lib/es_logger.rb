@@ -20,7 +20,7 @@ module EsLogger
 
       worker = EsLogger.configuration.async_handler
 
-      if valid_path?
+      if included_path?
         !worker.nil? ? worker.call(response) : EsLogger::Request.call(response)
         @processed = true
       else
@@ -30,15 +30,7 @@ module EsLogger
       @app.call(env)
     end
 
-    def valid_path?
-      excluded_path? || included_path?
-    end
-
     private
-
-    def excluded_path?
-      @response[:path] != '/cable'
-    end
 
     def included_path?
       include_pattern = EsLogger.configuration.include_pattern
