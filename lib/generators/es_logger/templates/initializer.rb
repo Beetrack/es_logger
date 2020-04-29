@@ -8,8 +8,8 @@ EsLogger.configure do |config|
   #
   # Set the pattern to allows save in Elasticsearch
   # Examples:
-  # ^api\/external\/\w+ -> api/external/<some word>
-  # config.include_pattern = [/^api\/external\/+w/, 'api/external/v1']
+  # ^\/api\/external\/\w+ -> /api/external/v1, /api/external/v1/routes
+  # config.include_pattern = [/^\/api\/external\/\w+/]
 
   # params configuration to connect with Elasticsearch
   config.elasticsearch = {
