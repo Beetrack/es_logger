@@ -20,7 +20,6 @@ module EsLogger
 
       if included_path?(env['PATH_INFO'])
         @response = EsLogger::Response.call(env)
-        puts @response.inspect
         !worker.nil? ? worker.call(response) : EsLogger::Request.call(response)
         @processed = true
       else
