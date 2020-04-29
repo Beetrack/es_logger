@@ -6,7 +6,7 @@ RSpec.describe EsLogger::Rack, elasticsearch: true do
   let(:request) { Rack::MockRequest.new(es_logger) }
   let!(:configure) do
     EsLogger.configure do |c|
-      c.include_pattern = [/^\/api\/external\/+w/, /^\/api\/external/]
+      c.include_pattern = [/^\/api\/external\/\w+/]
       c.elasticsearch = {
         user: ENV['ELASTICSEARCH_USER'] || 'elastic',
         password: ENV['ELASTICSEARCH_PASSWORD'] || '',
@@ -24,20 +24,20 @@ RSpec.describe EsLogger::Rack, elasticsearch: true do
     end
 
     it 'method GET' do
-      request.get("/api/external/routes?name=#{@name}&identifier=#{@identifier}", 'content-type' => 'application/json')
+      request.get("/api/external/v1/routes?name=#{@name}&identifier=#{@identifier}", 'content-type' => 'application/json')
       expect(es_logger.processed).to eq(true)
     end
 
     it 'method POST' do
       data = StringIO.new("identifier=#{@identifier}&name=#{@name}")
-      request.post('/api/external/routes/create', input: data, 'content-type' => 'application/json')
+      request.post('/api/external/v1/routes/create', input: data, 'content-type' => 'application/json')
       expect(es_logger.processed).to eq(true)
     end
   end
 
   context 'validate routes' do
     it 'include pattern' do
-      request.get('/api/external')
+      request.get('/api/external/v1/routes/')
       expect(es_logger.processed).to eq(true)
     end
 
