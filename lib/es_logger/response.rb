@@ -8,8 +8,10 @@ module EsLogger
         request_method: env['REQUEST_METHOD'],
         path: env['PATH_INFO'],
         query_string_params: ::Rack::Utils.parse_nested_query(env['QUERY_STRING']),
-        params: ::Rack::Utils.parse_query(env['rack.input'].read, '&'),
+        params: ::Rack::Utils.parse_query(env['rack.input'].read, '&')
       }
+
+      env['rack.input'].rewind
 
       controller = env['action_controller.instance']
 
@@ -20,6 +22,7 @@ module EsLogger
           'content_type' => controller.content_type || :none
         )
       end
+
       payload
     end
   end
