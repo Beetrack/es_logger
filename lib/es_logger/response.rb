@@ -3,15 +3,15 @@
 module EsLogger
   class Response
     def self.call(env)
+      request = ::Rack::Request.new(env)
+
       payload = {
         remote_address: env['REMOTE_ADDR'],
         request_method: env['REQUEST_METHOD'],
         path: env['PATH_INFO'],
         query_string_params: ::Rack::Utils.parse_nested_query(env['QUERY_STRING']),
-        params: ::Rack::Utils.parse_nested_query(env['rack.input'].read, '&')
+        params: request.params
       }
-
-      env['rack.input'].rewind
 
       controller = env['action_controller.instance']
 
