@@ -4,7 +4,7 @@ module EsLogger
   class Response
     def self.call(env)
       request = ::Rack::Request.new(env)
-      is_json = request.media_type.downcase == 'application/json'
+      is_json = request&.media_type&.downcase == 'application/json'
       body_stream = is_json ? request.body.read : nil
       request.body.rewind if body_stream
 
