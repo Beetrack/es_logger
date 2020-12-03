@@ -8,10 +8,10 @@ module EsLogger
       body_stream = is_json ? request.body.read : nil
       request.body.rewind if body_stream
 
+      headers = env.select {|k, v| k.to_s.start_with? 'HTTP_'}
+
       payload = {
-        remote_address: env['REMOTE_ADDR'],
-        request_method: env['REQUEST_METHOD'],
-        path: env['PATH_INFO'],
+        headers: headers.to_json,
         query_string_params: ::Rack::Utils.parse_nested_query(env['QUERY_STRING']),
         params: is_json && body_stream.length.positive? ? JSON.parse(body_stream) : nil
       }
