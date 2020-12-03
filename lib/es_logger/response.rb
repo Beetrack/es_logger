@@ -25,7 +25,7 @@ module EsLogger
         headers: headers.to_json,
         query_string_params: ::Rack::Utils.parse_nested_query(env['QUERY_STRING']),
         params: is_json && body_stream.length.positive? ? JSON.parse(body_stream) : nil,
-        authorization: decoded_token
+        authorization: decoded_token.first
       }
 
       controller = env['action_controller.instance']
