@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require 'jwt'
+require 'es_logger/configuration'
+
 module EsLogger
   class Response
     def self.call(env)
@@ -8,12 +11,21 @@ module EsLogger
       body_stream = is_json ? request.body.read : nil
       request.body.rewind if body_stream
 
-      headers = env.select {|k, v| k.to_s.start_with? 'HTTP_'}
+      jwt_key = nil
+
+      if !(jwt = EsLogger.configuration.jwt).nil?
+        jwt_key = "HTTP_#{jwt.upcase}"
+        jwt_value = env[jwt_key].split(' ').last
+      end
+
+      decoded_token = JWT.decode(jwt_value, nil, false)
+      headers = env.select { |k, _| k.to_s.start_with? 'HTTP_' }
 
       payload = {
         headers: headers.to_json,
         query_string_params: ::Rack::Utils.parse_nested_query(env['QUERY_STRING']),
-        params: is_json && body_stream.length.positive? ? JSON.parse(body_stream) : nil
+        params: is_json && body_stream.length.positive? ? JSON.parse(body_stream) : nil,
+        authorization: decoded_token
       }
 
       controller = env['action_controller.instance']
