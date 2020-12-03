@@ -27,6 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'connection_pool', '~> 2.2.2', '>= 2.2.2'
   spec.add_runtime_dependency 'elasticsearch', '~> 7.4'
   spec.add_runtime_dependency 'elasticsearch-persistence', '~> 7.0.0', '>= 7.0.0'
+  spec.add_runtime_dependency 'jwt', '~>2.2.2'
   spec.add_runtime_dependency 'rack', '~> 2.0'
   spec.add_runtime_dependency 'sidekiq', '>= 5.1.3', '<= 6.1.1'
   spec.add_development_dependency 'elasticsearch-extensions', '~> 0.0.31'
