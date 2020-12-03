@@ -10,6 +10,9 @@ EsLogger.configure do |config|
   # Examples:
   # ^\/api\/external\/\w+ -> /api/external/v1, /api/external/v1/routes
   # config.include_pattern = [/^\/api\/external\/\w+/]
+  #
+  # this option allows decode JWT header to index in ES
+  # config.jwt = 'Authorization'
 
   # params configuration to connect with Elasticsearch
   config.elasticsearch = {

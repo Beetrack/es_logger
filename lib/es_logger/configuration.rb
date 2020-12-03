@@ -11,6 +11,7 @@ module EsLogger
   end
 
   class Configuration
+    attr_accessor :jwt
     attr_accessor :async_handler
     attr_accessor :include_pattern
     attr_accessor :elasticsearch
@@ -18,6 +19,7 @@ module EsLogger
     attr_accessor :elasticsearch_pool_connection
 
     def initialize
+      @jwt = nil
       @async_handler = nil
       @include_pattern = nil
       @elasticsearch = {}
