@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 RSpec.describe EsLogger::Rack, elasticsearch: true do
@@ -6,7 +8,7 @@ RSpec.describe EsLogger::Rack, elasticsearch: true do
   let(:request) { Rack::MockRequest.new(es_logger) }
   let!(:configure) do
     EsLogger.configure do |c|
-      c.include_pattern = [/^\/api\/external\/\w+/]
+      c.include_pattern = [Regexp.new('^/api/external/\w+')]
       c.elasticsearch = {
         user: ENV['ELASTICSEARCH_USER'] || 'elastic',
         password: ENV['ELASTICSEARCH_PASSWORD'] || '',
