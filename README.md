@@ -8,6 +8,7 @@ EsLogger is a gem to intercept and save request in Elasticsearch. It has support
 - [x] Generate initialize configuration.
 - [x] Include pattern to accept the requests, Example: `^api\/external\/\w+` -> `api/external/<some word>`
 - [x] Process asyncronous with Sidekiq.
+- [x] Decode JWT Token and include headers to index.
 
 ## Future
 
