@@ -19,16 +19,17 @@ Gem::Specification.new do |spec|
       'public gem pushes.'
   end
 
-  spec.files = Dir.chdir(File.expand_path('..', __FILE__)) do
-    `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
+  spec.files = Dir.chdir(File.expand_path(__dir__)) do
+    `git ls-files -z`.split("\x0").reject { |f| f.match(Regexp.new('^(test|spec|features)/')) }
   end
   spec.require_paths = ['lib']
 
   spec.add_runtime_dependency 'connection_pool', '~> 2.2.2', '>= 2.2.2'
   spec.add_runtime_dependency 'elasticsearch', '~> 7.4'
   spec.add_runtime_dependency 'elasticsearch-persistence', '~> 7.0.0', '>= 7.0.0'
+  spec.add_runtime_dependency 'jwt', '~>2.2.2'
   spec.add_runtime_dependency 'rack', '~> 2.0'
-  spec.add_runtime_dependency 'sidekiq', '>= 5.1.3', '<= 5.3.0'
+  spec.add_runtime_dependency 'sidekiq', '>= 5.1.3', '<= 6.1.2'
   spec.add_development_dependency 'elasticsearch-extensions', '~> 0.0.31'
   spec.add_development_dependency 'pry', '~> 0.12.2'
   spec.add_development_dependency 'rspec', '~> 3.8', '<= 3.8'
