@@ -5,7 +5,7 @@ require 'es_logger/configuration'
 
 module EsLogger
   class Response
-    JWT_REGEX = Regexp.new('^(Bearer\s)?(?<token>[a-zA-Z0-9-_.]+)$')
+    JWT_REGEX = Regexp.new('^(Bearer\s)?(?<token>[a-zA-Z0-9\-_.]+)$')
 
     def self.call(env)
       payload = {
