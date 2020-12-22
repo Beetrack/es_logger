@@ -39,6 +39,10 @@ module EsLogger
       return unless body_stream.length.positive?
 
       JSON.parse(body_stream)
+    rescue JSON::ParserError => e
+      body = request.body.read
+      request.body.rewind
+      { body: body, error: e.message }
     end
 
     def self.http_headers(env)
@@ -50,10 +54,12 @@ module EsLogger
       return if jwt.nil?
 
       jwt_key = "HTTP_#{jwt.upcase}"
-      jwt_value = env[jwt_key].to_s.match(JWT_REGEX)[:token]
-      return if jwt_value.nil?
+      return unless env&.key?(jwt_key)
 
-      JWT.decode(jwt_value, nil, false).first
+      match = env[jwt_key].to_s.match(JWT_REGEX)
+      return unless match&.key?(:token)
+
+      JWT.decode(match[:token], nil, false).first
     rescue JWT::DecodeError
       nil
     end
