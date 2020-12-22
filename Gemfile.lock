@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    es_logger (1.5.0)
+    es_logger (1.5.1)
       connection_pool (~> 2.2.2, >= 2.2.2)
       elasticsearch (~> 7.4)
       elasticsearch-persistence (~> 7.0.0, >= 7.0.0)
@@ -91,7 +91,7 @@ GEM
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 1.7)
     ruby-progressbar (1.10.1)
-    sidekiq (6.1.1)
+    sidekiq (6.1.2)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
