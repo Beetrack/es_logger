@@ -49,15 +49,20 @@ module EsLogger
       env.select { |k, _| k.to_s.start_with? 'HTTP_' }
     end
 
-    def self.decode_jwt_token(env)
+    def self.get_token_from_env(env)
       jwt = EsLogger.configuration.jwt
-      return if jwt.nil?
+      return unless env.is_a?(Hash) && jwt.is_a?(String) && jwt.present?
 
-      jwt_key = "HTTP_#{jwt.upcase}"
-      return unless env&.key?(jwt_key)
+      jwt_header = "HTTP_#{jwt.upcase}"
+      env.key?(jwt_header) ? env[jwt_header] : nil
+    end
 
-      match = env[jwt_key].to_s.match(JWT_REGEX)
-      return unless match&.key?(:token)
+    def self.decode_jwt_token(env)
+      jwt_token = get_token_from_env(env)
+      return unless jwt_token.is_a?(String)
+
+      match = JWT_REGEX.match(jwt_token)
+      return unless match.is_a?(MatchData) && match.captures.any?
 
       JWT.decode(match[:token], nil, false).first
     rescue JWT::DecodeError
