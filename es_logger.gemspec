@@ -29,7 +29,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'elasticsearch-persistence', '~> 8.0.0', '>= 8.0.0'
   spec.add_runtime_dependency 'jwt', '~> 2.10.1'
   spec.add_runtime_dependency 'rack', '>= 2.0', '< 4.0'
-  spec.add_runtime_dependency 'sidekiq', '>= 5.2.9', '< 6.0'
+  spec.add_runtime_dependency 'sidekiq', '>= 5.2.9', '< 9.0' # Updated for Sidekiq 7.x compatibility
   spec.add_development_dependency 'elasticsearch-extensions', '~> 0.0.31'
   spec.add_development_dependency 'pry', '~> 0.15.2'
   spec.add_development_dependency 'rspec', '~> 3.13', '<= 3.13'
